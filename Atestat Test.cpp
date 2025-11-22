@@ -1,11 +1,4 @@
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <fstream>
-#include <random>
-#include <iomanip>
-#include <sstream>
-#include <filesystem>
+#include <bits/stdc++.h>
 
 using namespace std::filesystem;
 using namespace std;
