@@ -5,6 +5,9 @@
 #include <random>
 #include <iomanip>
 #include <sstream>
+#include <filesystem>
+
+using namespace std::filesystem;
 using namespace std;
 
 int alegere;
@@ -38,7 +41,6 @@ void Criptare(string mesaj) {
     int a, b, c, d;
     int poz=Pozitie(a, b, c, d);
     int len=mesaj.size();
-    char pula;
     for(int i=0; i<len; i++) {
         if(mesaj[i] >= 33 && mesaj[i] <= 126)
             mesaj[i]=((mesaj[i]-33+poz)%94)+33;
@@ -50,15 +52,18 @@ void Criptare(string mesaj) {
 }
 
 void Decriptare(string mesaj) {
-    int a, b, c, d;
-    int poz=Pozitie(a, b, c, d);
-    int len=mesaj.size();
-    for(int i=0; i<len; i++) {
-        if(mesaj[i] >= 33 && mesaj[i] <= 126) {
-            mesaj[i]=((mesaj[i]-33-poz+94)%94)+33;
+    if(exists(mesaj + ".txt")) {
+        ifstream decript(mesaj + ".txt");
+        int len=mesaj.size();
+        int i=0, a, b, c, d; decript >> a >> b >> c >> d;
+        while(i < len) {
+            if(mesaj[i]=='%') {
+                
+            }
+            i++;
         }
     }
-    cout<<mesaj<<endl;
+    else cout<<"Nu exista cheia de decodare"<<endl;
 }
 
 void Mesaj() {
@@ -141,6 +146,10 @@ string EncryptFile(string sir) {
     return sir_bun;
 }
 
+string DecryptFile(string sir) {
+
+}
+
 string ascii_to_hex(char c) {
     stringstream ah;
 
@@ -148,4 +157,8 @@ string ascii_to_hex(char c) {
     ah << static_cast<int>(c);
 
     return ah.str();
+}
+
+string hex_to_ascii(char c) {
+
 }
